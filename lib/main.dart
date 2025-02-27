@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'screens/categories_screen.dart';
+import 'screens/categories_meals_screen.dart';
+import 'utils/app_routes.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
                 titleLarge: TextStyle(
                   fontSize: 25,
                   fontFamily: 'Raleway',
-                ),                
+                ),
                 titleMedium: TextStyle(
                   fontSize: 18,
                   fontFamily: 'RobotoCondensed',
@@ -32,7 +34,11 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.pink,
             foregroundColor: Colors.white,
           )),
-      home: CategoriesScreen(),
+      //home: CategoriesScreen(), // puxa direto da rota
+      routes: {
+        AppRoutes.HOME: (ctx) => CategoriesScreen(),
+        AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(),
+      },
     );
   }
 }

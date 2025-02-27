@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:meals/utils/app_routes.dart';
 import '../models/category.dart';
-import '../screens/categories_meals_screen.dart';
+//import '../screens/categories_meals_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   final Category category;
@@ -10,12 +11,20 @@ class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key, required this.category});
 
   void _selectCategory(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) {
-          return CategoriesMealsScreen();
-        },
-      ),
+    // navegação via construtor
+
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (_) {
+    //       return CategoriesMealsScreen(category);
+    //     },
+    //   ),
+    // );
+
+    //Navegação  via Rota - enviando os argumentos ao clique
+    Navigator.of(context).pushNamed(
+      AppRoutes.CATEGORIES_MEALS,
+      arguments: category,
     );
   }
 
