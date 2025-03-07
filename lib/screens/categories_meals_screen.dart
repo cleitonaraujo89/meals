@@ -25,11 +25,13 @@ class CategoriesMealsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(category.title),
       ),
+      // cria um ListView com cada item na lista
       body: ListView.builder(
-          itemCount: categogyMeals.length,
-          itemBuilder: (ctx, index) {
-            return MealItem(categogyMeals[index]);
-          }),
+        itemCount: categogyMeals.length,
+        itemBuilder: (ctx, index) {
+          return MealItem(categogyMeals[index]);
+        },
+      ),
     );
   }
 }

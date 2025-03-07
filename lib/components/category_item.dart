@@ -21,7 +21,7 @@ class CategoryItem extends StatelessWidget {
     //   ),
     // );
 
-    //Navegação  via Rota - enviando os argumentos ao clique
+    //Navegação  via Rota - enviando os argumentos (a categoria) ao clique a próxima tela
     Navigator.of(context).pushNamed(
       AppRoutes.CATEGORIES_MEALS,
       arguments: category,
@@ -31,18 +31,21 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      //quando clicado passa p conteste e executa a navegação
       onTap: () => _selectCategory(context),
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(15),
       child: Container(
         padding: EdgeInsets.all(15),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: LinearGradient(
-              colors: [category.color.withOpacity(0.5), category.color],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            )),
+          borderRadius: BorderRadius.circular(15),
+          //efeito gradiente com as cores das categorias
+          gradient: LinearGradient(
+            colors: [category.color.withOpacity(0.5), category.color],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
         child: Text(
           category.title,
           style: Theme.of(context).textTheme.titleMedium,

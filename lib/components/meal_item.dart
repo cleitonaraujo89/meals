@@ -7,6 +7,7 @@ class MealItem extends StatelessWidget {
   const MealItem(this.meal);
 
   final Meal meal;
+
   void _selectMeal() {}
 
   @override
@@ -14,6 +15,7 @@ class MealItem extends StatelessWidget {
     return InkWell(
       onTap: _selectMeal,
       child: Card(
+        //forma do card
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -23,12 +25,13 @@ class MealItem extends StatelessWidget {
           children: [
             Stack(
               children: [
-                //ClipRRect ajuda a da a forma retangular ao widget e possibilita o BorderRadius
+                //ClipRRect ajuda a da a forma retangular ao widget e possibilita o BorderRadius pois a img n estava respeitando o RoundedRectangleBorder
                 ClipRRect(
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15),
                   ),
+                  //puxa a imagem da internet
                   child: Image.network(
                     meal.imageUrl,
                     height: 250,
@@ -43,11 +46,12 @@ class MealItem extends StatelessWidget {
                   child: Container(
                     width: 300,
                     decoration: const BoxDecoration(
-                        color: Colors.black45,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          bottomLeft: Radius.circular(15),
-                        )),
+                      color: Colors.black45,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        bottomLeft: Radius.circular(15),
+                      ),
+                    ),
                     padding: const EdgeInsets.symmetric(
                       vertical: 5,
                       horizontal: 20,
