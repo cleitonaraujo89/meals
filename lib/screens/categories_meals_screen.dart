@@ -12,7 +12,7 @@ class CategoriesMealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //navegação via rota - pegando a categoria que é passada como argumento
+    //navegação via rota - pegando a categoria que é passada como argumento, perceba que está dentro do build
     final Category category =
         ModalRoute.of(context)?.settings.arguments as Category;
 
