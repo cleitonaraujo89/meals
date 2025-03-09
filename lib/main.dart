@@ -14,9 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Vamos Cozinhar?',
       theme: ThemeData(
-          colorSchemeSeed: Colors.pink,
+          //colorSchemeSeed: Colors.pink,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink)
+              .copyWith(primary: Colors.pink, secondary: Colors.amber),
           fontFamily: 'Raleway',
           useMaterial3: true,
           canvasColor: Color.fromRGBO(255, 254, 229, 1),
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
           )),
       //home: CategoriesScreen(), // puxa direto da rota
       routes: {
-        AppRoutes.HOME: (ctx) => TabsScreen(), // pagina inicial é o controlador de abas
+        AppRoutes.HOME: (ctx) =>
+            TabsScreen(), // pagina inicial é o controlador de abas
         AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(),
         AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
       },
