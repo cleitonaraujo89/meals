@@ -47,3 +47,10 @@ android/.gradle/
 android/app/build/
 android/file-system.probe
 android/executionHistory.bin
+android/.gradle/8.3/fileHashes/fileHashes.lock
+android/.gradle/8.3/executionHistory/executionHistory.lock
+android/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+android/.gradle/8.3/fileHashes/fileHashes.bin
+android/.gradle/file-system.probe
+android/.gradle/8.3/executionHistory/executionHistory.bin
+

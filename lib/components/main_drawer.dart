@@ -1,9 +1,15 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import '../utils/app_routes.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
 
-  Widget _createItem(IconData icon, String label) {
+  Widget _createItem(
+      {required IconData icon,
+      required String label,
+      required VoidCallback onTap}) {
     return ListTile(
       leading: Icon(
         icon,
@@ -17,7 +23,7 @@ class MainDrawer extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () {},
+      onTap: onTap,
     );
   }
 
@@ -42,8 +48,22 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          _createItem(Icons.restaurant, 'Refeições'),
-          _createItem(Icons.settings, 'Configurações'),
+          _createItem(
+            icon: Icons.restaurant,
+            label: 'Refeições',
+            onTap: () {
+              //Navigator.of(context).pop();
+              Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
+            },
+          ),
+          _createItem(
+            icon: Icons.settings,
+            label: 'Configurações',
+            onTap: () {
+              Navigator.of(context).pop(); // Fecha o Drawer
+              Navigator.of(context).pushNamed(AppRoutes.SETTINGS);
+            },
+          ),
         ],
       ),
     );
