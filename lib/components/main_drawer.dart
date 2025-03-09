@@ -53,6 +53,9 @@ class MainDrawer extends StatelessWidget {
             label: 'Refeições',
             onTap: () {
               //Navigator.of(context).pop();
+
+              //subistitui a rota atual pela nova podendo supstituir o pop em alguns casos
+              //pois perde aquela setinha para voltar no canto superior direito
               Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
             },
           ),

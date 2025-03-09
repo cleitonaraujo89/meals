@@ -10,10 +10,20 @@ class MealItem extends StatelessWidget {
   final Meal meal;
 
   void _selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(
+    Navigator.of(context)
+        .pushNamed(
       AppRoutes.MEAL_DETAIL,
       arguments: meal,
-    );
+    )
+        .then((result) {
+      //executa esse bloco somente se algum argumento for passado quando a rota for fechada
+      //exemplo: Navigator.of(context).pop(meal.title), quando n é passado retorna como null
+      if (result == null) {
+        print('Sem resultado');
+      } else {
+        print('Tem resultado: $result.');
+      }
+    });
   }
 
   @override
