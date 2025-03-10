@@ -19,14 +19,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   //estancia o objeto que vai ser alterado quando for modificado em settings_screen
   Settings settings = Settings();
   //recebe inicialmente a lista padrão, caso o usuario escolha algum filtro
   //será atribuido uma nova lista após a função abaixo ser executada
   List<Meal> _availableMeals = DUMMY_MEALS;
+  final  List<Meal> _favoriteMeals = [];
 
-  void _filterMeals(Settings settings){
+  void _filterMeals(Settings settings) {
     setState(() {
       this.settings = settings; //altera o objeto com os novos valores
       //filtra a lista de acordo com as opções selecionadas pelo usuário
@@ -36,11 +36,22 @@ class _MyAppState extends State<MyApp> {
         final filterVegetarian = settings.isVegetarian && !meal.isVegetarian;
         final filterVegan = settings.isVegan && !meal.isVegan;
 
-        return !filterGluten && !filterLactose && !filterVegetarian && !filterVegan;
+        return !filterGluten &&
+            !filterLactose &&
+            !filterVegetarian &&
+            !filterVegan;
       }).toList(); // só passa o que for True em todas, lembrando q o padrão é todas
       // falsas em settings, ou seja se nada for alterado... tudo true, caso algo seja alterado
-      //settings.isGlutenFree (true) e meal.isGlutenFree (true  que vira false) no fim é 
+      //settings.isGlutenFree (true) e meal.isGlutenFree (true  que vira false) no fim é
       //false q vira true, caso set. true e meal false (q vira true) = true q no fim vira false e n entra na lista
+    });
+  }
+
+  void _toggleFavorite(Meal meal) {
+    setState(() {
+      _favoriteMeals.contains(meal)
+          ? _favoriteMeals.remove(meal)
+          : _favoriteMeals.add(meal);
     });
   }
 
@@ -74,15 +85,16 @@ class _MyAppState extends State<MyApp> {
       //home: CategoriesScreen(), // puxa direto da rota
       routes: {
         // pagina inicial é o controlador de abas
-        AppRoutes.HOME: (ctx) => TabsScreen(),
-        AppRoutes.CATEGORIES_MEALS: (ctx) => CategoriesMealsScreen(_availableMeals),
-        AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
+        AppRoutes.HOME: (ctx) => TabsScreen(_favoriteMeals),
+        AppRoutes.CATEGORIES_MEALS: (ctx) =>
+            CategoriesMealsScreen(_availableMeals),
+        AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(_toggleFavorite),
         AppRoutes.SETTINGS: (ctx) => SettingsScreen(settings, _filterMeals),
       },
       // caso não ache alguma rota, volta pra tela inicial
       onUnknownRoute: (context) {
         return MaterialPageRoute(builder: (_) {
-          return TabsScreen();
+          return TabsScreen(_favoriteMeals);
         });
       },
     );
