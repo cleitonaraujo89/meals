@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import '../models/meal.dart';
 
 class MealDetailScreen extends StatelessWidget {
-  const MealDetailScreen(this.onToggleFavorite);
+  const MealDetailScreen(this.onToggleFavorite, this.isFavorite);
 
   final Function(Meal) onToggleFavorite;
+  final bool Function(Meal) isFavorite;
 
   Widget _createSectionTitle(BuildContext context, String title) {
     return Container(
@@ -68,7 +69,8 @@ class MealDetailScreen extends StatelessWidget {
               ),
             ), //_createSectionConteiner
             _createSectionTitle(context, 'Passos'),
-            _createSectionConteiner(ListView.builder(
+            _createSectionConteiner(
+              ListView.builder(
                 itemCount: meal.steps.length,
                 itemBuilder: (ctx, index) {
                   return Column(
@@ -82,7 +84,10 @@ class MealDetailScreen extends StatelessWidget {
                       Divider(),
                     ],
                   );
-                }))
+                },
+              ),
+            ),
+            SizedBox(height: 30)
           ],
         ),
       ),
@@ -90,7 +95,7 @@ class MealDetailScreen extends StatelessWidget {
         onPressed: () {
           onToggleFavorite(meal);
         },
-        child: Icon(Icons.star),
+        child: Icon(isFavorite(meal) ? Icons.star : Icons.star_border),
       ),
     );
   }
