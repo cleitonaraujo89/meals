@@ -4,14 +4,25 @@ import 'package:flutter/material.dart';
 import '../models/settings.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen(this.settings, this.onSettingsChanged);
+
+  final Settings settings;
+  final Function(Settings) onSettingsChanged;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  var settings = Settings();
+  late Settings settingsLocal; //atribuida apois o initState
+
+//sobrescreve o método mantendo a configuração padrão (supe.initState())
+//e atribui a settingsLocal as configurações que vieram do main
+  @override
+  void initState() {
+    super.initState();
+    settingsLocal = widget.settings;
+  }
 
   Widget _createSwitch({
     required String title,
@@ -19,11 +30,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
-    return SwitchListTile(
+    //switch adaptativo, pega o valor alterado e passa oara a função onchange, em seguida
+    //ativa a função passada pelo main com o setingsLocal como parametro
+    return SwitchListTile.adaptive(
       title: Text(title),
       subtitle: Text(subtitle),
       value: value,
-      onChanged: onChanged,
+      onChanged: (value) {
+        onChanged(value);
+        widget.onSettingsChanged(settingsLocal);
+      },
     );
   }
 
@@ -49,37 +65,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _createSwitch(
                 title: 'Sem Glutén',
                 subtitle: 'Só exibe refeições sem glúten!',
-                value: settings.isGlutenFree, // valor inicial
+                value: settingsLocal.isGlutenFree, // valor inicial
                 //quando clicado altera e chama o setState
                 onChanged: (value) => setState(
-                  () => settings.isGlutenFree = value,
+                  () => settingsLocal.isGlutenFree = value,
                 ),
               ),
               _createSwitch(
                 title: 'Sem Lactose',
                 subtitle: 'Só exibe refeições sem lactose!',
-                value: settings.isLactoseFree, // valor inicial
+                value: settingsLocal.isLactoseFree, // valor inicial
                 //quando clicado altera e chama o setState
                 onChanged: (value) => setState(
-                  () => settings.isLactoseFree = value,
+                  () => settingsLocal.isLactoseFree = value,
                 ),
               ),
               _createSwitch(
                 title: 'Vegetariana',
                 subtitle: 'Só exibe refeições vegetarianas!',
-                value: settings.isVegetarian, // valor inicial
+                value: settingsLocal.isVegetarian, // valor inicial
                 //quando clicado altera e chama o setState
                 onChanged: (value) => setState(
-                  () => settings.isVegetarian = value,
+                  () => settingsLocal.isVegetarian = value,
                 ),
               ),
               _createSwitch(
                 title: 'Vegana',
                 subtitle: 'Só exibe refeições Veganas!',
-                value: settings.isVegan, // valor inicial
+                value: settingsLocal.isVegan, // valor inicial
                 //quando clicado altera e chama o setState
                 onChanged: (value) => setState(
-                  () => settings.isVegan = value,
+                  () => settingsLocal.isVegan = value,
                 ),
               ),
             ],
