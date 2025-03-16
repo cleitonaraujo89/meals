@@ -1,5 +1,3 @@
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
 import 'package:meals/models/category.dart';
 import '../components/meal_item.dart';
@@ -9,7 +7,7 @@ class CategoriesMealsScreen extends StatelessWidget {
  
   final List<Meal> meals;
 
-  const CategoriesMealsScreen(this.meals);
+  const CategoriesMealsScreen(this.meals, {super.key});
 
   @override
   Widget build(BuildContext context) {

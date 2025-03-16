@@ -1,11 +1,9 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, avoid_print
-
 import 'package:flutter/material.dart';
 import '../models/meal.dart';
 import '../utils/app_routes.dart';
 
 class MealItem extends StatelessWidget {
-  const MealItem(this.meal);
+  const MealItem(this.meal, {super.key});
 
   final Meal meal;
 
@@ -18,11 +16,11 @@ class MealItem extends StatelessWidget {
         .then((result) {
       //executa esse bloco somente se algum argumento for passado quando a rota for fechada
       //exemplo: Navigator.of(context).pop(meal.title), quando n é passado retorna como null
-      if (result == null) {
-        print('Sem resultado');
-      } else {
-        print('Tem resultado: $result.');
-      }
+      // if (result == null) {
+      //   print('Sem resultado');
+      // } else {
+      //   print('Tem resultado: $result.');
+      // }
     });
   }
 
@@ -86,14 +84,14 @@ class MealItem extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.schedule),
-                      SizedBox(
+                      const Icon(Icons.schedule),
+                      const SizedBox(
                         width: 6,
                       ),
                       Text('${meal.duration} min')
@@ -101,8 +99,8 @@ class MealItem extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.work),
-                      SizedBox(
+                      const Icon(Icons.work),
+                      const SizedBox(
                         width: 6,
                       ),
                       Text(meal.complexityText)
@@ -110,8 +108,8 @@ class MealItem extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.attach_money),
-                      SizedBox(
+                      const Icon(Icons.attach_money),
+                      const SizedBox(
                         width: 6,
                       ),
                       Text(meal.costText)

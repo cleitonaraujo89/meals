@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import '../utils/app_routes.dart';
 
@@ -17,7 +15,7 @@ class MainDrawer extends StatelessWidget {
       ),
       title: Text(
         label,
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: 'RobotoCondensed',
           fontSize: 24,
           fontWeight: FontWeight.bold,
@@ -35,7 +33,7 @@ class MainDrawer extends StatelessWidget {
           Container(
             height: 120,
             width: double.infinity,
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             alignment: Alignment.bottomRight,
             color: Theme.of(context).colorScheme.secondary,
             child: Text(
@@ -47,7 +45,7 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           _createItem(
             icon: Icons.restaurant,
             label: 'Refeições',

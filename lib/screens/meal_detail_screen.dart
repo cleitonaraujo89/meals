@@ -1,14 +1,14 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
 import '../models/meal.dart';
 import 'package:provider/provider.dart';
 import '../providers/favorite_provider.dart';
 
 class MealDetailScreen extends StatelessWidget {
+  const MealDetailScreen({super.key});
+
   Widget _createSectionTitle(BuildContext context, String title) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         title,
         style: Theme.of(context).textTheme.titleMedium,
@@ -20,8 +20,8 @@ class MealDetailScreen extends StatelessWidget {
     return Container(
         width: 320,
         height: 250,
-        padding: EdgeInsets.all(10),
-        margin: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: Colors.grey),
@@ -78,13 +78,13 @@ class MealDetailScreen extends StatelessWidget {
                         ),
                         title: Text(meal.steps[index]),
                       ),
-                      Divider(),
+                      const Divider(),
                     ],
                   );
                 },
               ),
             ),
-            SizedBox(height: 30)
+            const SizedBox(height: 30)
           ],
         ),
       ),

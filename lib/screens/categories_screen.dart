@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import '../components/category_item.dart';
 import '../data/dummy_data.dart';
@@ -10,7 +8,7 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200, // cada item com no max 200px na horizontal
         childAspectRatio: 3 / 2, // proporção largura x altura (1,5 no caso)

@@ -1,10 +1,9 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 import '../components/main_drawer.dart';
 import 'package:flutter/material.dart';
 import '../models/settings.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen(this.settings, this.onSettingsChanged);
+  const SettingsScreen(this.settings, this.onSettingsChanged, {super.key});
 
   final Settings settings;
   final Function(Settings) onSettingsChanged;
@@ -47,13 +46,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Configurações'),
+        title: const Text('Configurações'),
       ),
-      drawer: MainDrawer(),
+      drawer: const MainDrawer(),
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Text(
               'Configurações',
               style: Theme.of(context).textTheme.titleMedium,

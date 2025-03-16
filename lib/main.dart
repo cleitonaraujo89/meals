@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './providers/favorite_provider.dart';
@@ -13,9 +11,11 @@ import 'screens/settings_screen.dart';
 import 'models/meal.dart';
 import 'data/dummy_data.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -60,19 +60,19 @@ class _MyAppState extends State<MyApp> {
                 .copyWith(primary: Colors.pink, secondary: Colors.amber),
             fontFamily: 'Raleway',
             useMaterial3: true,
-            canvasColor: Color.fromRGBO(255, 254, 229, 1),
+            canvasColor: const Color.fromRGBO(255, 254, 229, 1),
             textTheme: ThemeData.light().textTheme.copyWith(
-                  titleLarge: TextStyle(
+                  titleLarge: const TextStyle(
                     fontSize: 25,
                     fontFamily: 'Raleway',
                   ),
-                  titleMedium: TextStyle(
+                  titleMedium: const TextStyle(
                     fontSize: 18,
                     fontFamily: 'RobotoCondensed',
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-            appBarTheme: AppBarTheme(
+            appBarTheme: const AppBarTheme(
               centerTitle: true,
               backgroundColor: Colors.pink,
               foregroundColor: Colors.white,
@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
         //home: CategoriesScreen(), // puxa direto da rota
         routes: {
           // pagina inicial é o controlador de abas
-          AppRoutes.HOME: (ctx) => TabsScreen(),
+          AppRoutes.HOME: (ctx) => const TabsScreen(),
           AppRoutes.CATEGORIES_MEALS: (ctx) =>
               CategoriesMealsScreen(_availableMeals),
           AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
@@ -89,7 +89,7 @@ class _MyAppState extends State<MyApp> {
         // caso não ache alguma rota, volta pra tela inicial
         onUnknownRoute: (context) {
           return MaterialPageRoute(builder: (_) {
-            return TabsScreen();
+            return const TabsScreen();
           });
         },
       ),
