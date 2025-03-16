@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import './providers/favorite_provider.dart';
 import 'package:meals/models/settings.dart';
 //import 'screens/categories_screen.dart';
 import 'screens/categories_meals_screen.dart';
@@ -24,7 +26,6 @@ class _MyAppState extends State<MyApp> {
   //recebe inicialmente a lista padrão, caso o usuario escolha algum filtro
   //será atribuido uma nova lista após a função abaixo ser executada
   List<Meal> _availableMeals = DUMMY_MEALS;
-  final  List<Meal> _favoriteMeals = [];
 
   void _filterMeals(Settings settings) {
     setState(() {
@@ -47,61 +48,51 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  //checagem se já é ou não favorito
-  void _toggleFavorite(Meal meal) {
-    setState(() {
-      _favoriteMeals.contains(meal)
-          ? _favoriteMeals.remove(meal)
-          : _favoriteMeals.add(meal);
-    });
-  }
-
-  bool _isFavorite(Meal meal){
-    return _favoriteMeals.contains(meal);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          //colorSchemeSeed: Colors.pink,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink)
-              .copyWith(primary: Colors.pink, secondary: Colors.amber),
-          fontFamily: 'Raleway',
-          useMaterial3: true,
-          canvasColor: Color.fromRGBO(255, 254, 229, 1),
-          textTheme: ThemeData.light().textTheme.copyWith(
-                titleLarge: TextStyle(
-                  fontSize: 25,
-                  fontFamily: 'Raleway',
+    return ChangeNotifierProvider(
+      create: (_) => FavoriteProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            //colorSchemeSeed: Colors.pink,
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink)
+                .copyWith(primary: Colors.pink, secondary: Colors.amber),
+            fontFamily: 'Raleway',
+            useMaterial3: true,
+            canvasColor: Color.fromRGBO(255, 254, 229, 1),
+            textTheme: ThemeData.light().textTheme.copyWith(
+                  titleLarge: TextStyle(
+                    fontSize: 25,
+                    fontFamily: 'Raleway',
+                  ),
+                  titleMedium: TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'RobotoCondensed',
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-                titleMedium: TextStyle(
-                  fontSize: 18,
-                  fontFamily: 'RobotoCondensed',
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-          appBarTheme: AppBarTheme(
-            centerTitle: true,
-            backgroundColor: Colors.pink,
-            foregroundColor: Colors.white,
-          )),
-      //home: CategoriesScreen(), // puxa direto da rota
-      routes: {
-        // pagina inicial é o controlador de abas
-        AppRoutes.HOME: (ctx) => TabsScreen(_favoriteMeals),
-        AppRoutes.CATEGORIES_MEALS: (ctx) =>
-            CategoriesMealsScreen(_availableMeals),
-        AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(_toggleFavorite, _isFavorite),
-        AppRoutes.SETTINGS: (ctx) => SettingsScreen(settings, _filterMeals),
-      },
-      // caso não ache alguma rota, volta pra tela inicial
-      onUnknownRoute: (context) {
-        return MaterialPageRoute(builder: (_) {
-          return TabsScreen(_favoriteMeals);
-        });
-      },
+            appBarTheme: AppBarTheme(
+              centerTitle: true,
+              backgroundColor: Colors.pink,
+              foregroundColor: Colors.white,
+            )),
+        //home: CategoriesScreen(), // puxa direto da rota
+        routes: {
+          // pagina inicial é o controlador de abas
+          AppRoutes.HOME: (ctx) => TabsScreen(),
+          AppRoutes.CATEGORIES_MEALS: (ctx) =>
+              CategoriesMealsScreen(_availableMeals),
+          AppRoutes.MEAL_DETAIL: (ctx) => MealDetailScreen(),
+          AppRoutes.SETTINGS: (ctx) => SettingsScreen(settings, _filterMeals),
+        },
+        // caso não ache alguma rota, volta pra tela inicial
+        onUnknownRoute: (context) {
+          return MaterialPageRoute(builder: (_) {
+            return TabsScreen();
+          });
+        },
+      ),
     );
   }
 }
